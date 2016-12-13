@@ -4,8 +4,10 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * JPA Entity for the STOCKS.USERS table.
@@ -17,13 +19,20 @@ import java.io.Serializable;
 public class UsersEntity implements Serializable {
 
     private static final long serialVersionUID = 9157226449683413471L;
-    private Long id;
-    private String userName;
-    private Long groupId;
-
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
+    private Long id;
+
+    @Basic
+    @Column(name = "USER_NAME", nullable = false, length = 100)
+    private String userName;
+
+    //private Long groupId;
+    @ManyToMany
+    Set<GroupsEntity> groupsEntitySet;
+
+
     public Long getId() {
         return id;
     }
@@ -32,8 +41,6 @@ public class UsersEntity implements Serializable {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "USER_NAME", nullable = false, length = 100)
     public String getUserName() {
         return userName;
     }
@@ -42,7 +49,7 @@ public class UsersEntity implements Serializable {
         this.userName = userName;
     }
 
-    @Basic
+    /*@Basic
     @Column(name = "GROUP_ID", nullable = false, precision = 0)
     public Long getGroupId() {
         return groupId;
@@ -50,6 +57,14 @@ public class UsersEntity implements Serializable {
 
     public void setGroupId(Long groupId) {
         this.groupId = groupId;
+    }*/
+
+    public Set<GroupsEntity> getGroupsEntitySet() {
+        return groupsEntitySet;
+    }
+
+    public void setGroupsEntitySet(Set<GroupsEntity> groupsEntitySet) {
+        this.groupsEntitySet = groupsEntitySet;
     }
 
     @Override
@@ -60,8 +75,7 @@ public class UsersEntity implements Serializable {
         UsersEntity that = (UsersEntity) o;
 
         if (!getId().equals(that.getId())) return false;
-        if (!getUserName().equals(that.getUserName())) return false;
-        return getGroupId().equals(that.getGroupId());
+        return getUserName().equals(that.getUserName());
 
     }
 
@@ -69,7 +83,6 @@ public class UsersEntity implements Serializable {
     public int hashCode() {
         int result = getId().hashCode();
         result = 31 * result + getUserName().hashCode();
-        result = 31 * result + getGroupId().hashCode();
         return result;
     }
 

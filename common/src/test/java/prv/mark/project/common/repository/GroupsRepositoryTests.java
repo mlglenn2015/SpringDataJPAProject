@@ -13,9 +13,11 @@ import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.persistence.PersistenceException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -83,7 +85,14 @@ public class GroupsRepositoryTests extends AbstractAppTransactionalTest {
         prv.mark.project.common.entity.GroupsEntity entity = new prv.mark.project.common.entity.GroupsEntity();
         entity.setId(null);
         entity.setGroupName("TEST GROUP");
-        entity.setUserId(1L);
+        UsersEntity usersEntity = new UsersEntity();
+        usersEntity.setId(1L);
+        usersEntity.setUserName("Mark User1");
+        //usersEntity.setGroupsEntitySet();
+        Set<UsersEntity> usersEntitySet = new HashSet<>();
+        usersEntitySet.add(usersEntity);
+        //entity.setUsersEntitySet(usersEntitySet); TODO
+        //entity.setUserId(1L);
         return entity;
     }
 
