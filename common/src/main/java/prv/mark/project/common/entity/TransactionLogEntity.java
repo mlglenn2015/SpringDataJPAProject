@@ -19,7 +19,7 @@ import java.util.Date;
  * @author mlglenn.
  */
 @Entity
-@Table(name = "TRANSACTION_LOG", schema = "STOCKS", catalog = "")
+@Table(name = "TRANSACTION_LOG")  //@Table(name = "TRANSACTION_LOG", schema = "STOCKS", catalog = "") TODO cleanup
 public class TransactionLogEntity implements Serializable {
 
     private static final long serialVersionUID = -5939529108912508042L;

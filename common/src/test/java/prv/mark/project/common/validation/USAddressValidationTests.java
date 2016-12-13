@@ -50,6 +50,11 @@ public class USAddressValidationTests extends AbstractAppTransactionalTest {
     }
 
     @Test
+    public void defaultTest() {
+        LOGGER.debug("USAddressValidationTests.defaultTest()");
+    }
+
+    @Test
     public void testValidUSPostalAddress() {
         USPostalAddress usPostalAddress = buildAddress();
         assertNotNull(usPostalAddress);

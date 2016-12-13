@@ -8,15 +8,19 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Created by mlglenn on 12/12/2016.
+ * JPA Entity for the STOCKS.GROUPS table.
+ *
+ * @author mlglenn on 12/12/2016.
  */
 @Entity
-@Table(name = "GROUPS", schema = "STOCKS", catalog = "")
+@Table(name = "GROUPS")   //@Table(name = "GROUPS", schema = "STOCKS", catalog = "")  TODO cleanup
 public class GroupsEntity implements Serializable {
 
     private static final long serialVersionUID = -2769750154242294344L;
     private Long id;
     private String groupName;
+    private Long userId;
+
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
@@ -38,6 +42,16 @@ public class GroupsEntity implements Serializable {
         this.groupName = groupName;
     }
 
+    @Basic
+    @Column(name = "USER_ID", nullable = false, precision = 0)
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,16 +59,17 @@ public class GroupsEntity implements Serializable {
 
         GroupsEntity that = (GroupsEntity) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (groupName != null ? !groupName.equals(that.groupName) : that.groupName != null) return false;
+        if (!getId().equals(that.getId())) return false;
+        if (!getGroupName().equals(that.getGroupName())) return false;
+        return getUserId().equals(that.getUserId());
 
-        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
+        int result = getId().hashCode();
+        result = 31 * result + getGroupName().hashCode();
+        result = 31 * result + getUserId().hashCode();
         return result;
     }
 

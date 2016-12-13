@@ -8,14 +8,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
- * Created by mlglenn on 12/12/2016.
+ * JPA Entity for the STOCKS.APPLICATION_PARAMETERS table.
+ *
+ * @author mlglenn on 12/12/2016.
  */
 @Entity
-@Table(name = "APPLICATION_PARAMETERS", schema = "STOCKS", catalog = "")
+@Table(name = "APPLICATION_PARAMETERS")   //@Table(name = "APPLICATION_PARAMETERS", schema = "STOCKS", catalog = "")  TODO cleanup
 public class ApplicationParametersEntity implements Serializable {
 
     private static final long serialVersionUID = 3290787772159486073L;
@@ -23,7 +27,7 @@ public class ApplicationParametersEntity implements Serializable {
     private String key;
     private String property;
     private String enabled;
-    private Timestamp created;
+    private Date created;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
@@ -67,13 +71,13 @@ public class ApplicationParametersEntity implements Serializable {
         this.enabled = enabled;
     }
 
-    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED", nullable = false)
-    public Timestamp getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Timestamp created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 

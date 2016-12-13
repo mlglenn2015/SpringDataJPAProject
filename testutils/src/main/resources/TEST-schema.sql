@@ -130,6 +130,25 @@ CREATE SEQUENCE SEQ_APPLICATION_PARAMETERS
     INCREMENT BY 1;
 
 ----------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS USERS;
+
+CREATE TABLE USERS (
+  ID          NUMERIC                          NOT NULL PRIMARY KEY,
+  --USER_ID     VARCHAR2(30)                        NOT NULL,
+  USER_NAME   VARCHAR(100)                       NOT NULL,
+  GROUP_ID    NUMERIC                          NOT NULL
+);
+
+
+DROP TABLE IF EXISTS GROUPS;
+
+CREATE TABLE GROUPS (
+  ID          NUMERIC                          NOT NULL PRIMARY KEY,
+  --GROUP_ID    VARCHAR2(30)                        NOT NULL,
+  GROUP_NAME  VARCHAR(100)                       NOT NULL,
+  USER_ID     NUMERIC                          NOT NULL
+);
+
 ----------------------------------------------------------------------------------------------------
 COMMIT;
 ----------------------------------------------------------------------------------------------------

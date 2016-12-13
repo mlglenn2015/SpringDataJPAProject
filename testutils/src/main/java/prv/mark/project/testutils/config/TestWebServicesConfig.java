@@ -37,16 +37,16 @@ public class TestWebServicesConfig {
     @Value("${application.trust.store.password}")
     private String trustStorePassword;
 
-    private static final Class<?>[] CLASSES_TO_BE_BOUND = {
-            /*GetStockPriceRequest.class, TODO
+    /*private static final Class<?>[] CLASSES_TO_BE_BOUND = {
+            GetStockPriceRequest.class, TODO
             GetStockPriceResponse.class,
             StockOrder.class,
             StockQuote.class,
             SubmitOrderRequest.class,
             SubmitOrderResponse.class,
             TransactionLoggerMsgType.class,
-            RequestHeader.class*/
-    };
+            RequestHeader.class
+    };*/
 
     @Autowired
     private Environment environment;
@@ -86,7 +86,8 @@ public class TestWebServicesConfig {
     @Bean
     public Jaxb2Marshaller soapMarshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setClassesToBeBound(CLASSES_TO_BE_BOUND);
+        //marshaller.setClassesToBeBound(CLASSES_TO_BE_BOUND);
+        marshaller.setPackagesToScan("prv.mark.project.schemas");
         return marshaller;
     }
 

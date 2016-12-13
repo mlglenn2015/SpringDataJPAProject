@@ -11,10 +11,12 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Created by mlglenn on 12/12/2016.
+ * JPA Entity for the STOCKS.ORDER_STATUS table.
+ *
+ * @author mlglenn on 12/12/2016.
  */
 @Entity
-@Table(name = "ORDER_STATUS", schema = "STOCKS", catalog = "")
+@Table(name = "ORDER_STATUS")   //@Table(name = "ORDER_STATUS", schema = "STOCKS", catalog = "")  TODO cleanup
 public class OrderStatusEntity implements Serializable {
 
     private static final long serialVersionUID = 7729506380238566594L;

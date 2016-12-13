@@ -40,7 +40,7 @@ public class TestDataConfig {
 
     @Bean
     public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).setName("MARKTEST")
+        return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).setName("STOCKS")
                 .addScript("classpath:TEST-schema.sql")
                 .addScript("classpath:TEST-data.sql")
                 .build();
@@ -63,8 +63,10 @@ public class TestDataConfig {
         LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
 
         emfb.setDataSource(dataSource());
-        emfb.setPackagesToScan("prv.mark.project");
+        emfb.setPackagesToScan("prv.mark.project.common.entity");
         emfb.setJpaDialect(new EclipseLinkJpaDialect());
+
+        //emfb.setPersistenceXmlLocation();
 
         AbstractJpaVendorAdapter jpaVendorAdapter = new EclipseLinkJpaVendorAdapter();
         jpaVendorAdapter.setShowSql(true);

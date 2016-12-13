@@ -11,10 +11,12 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Created by mlglenn on 12/12/2016.
+ * JPA Entity for the STOCKS.APPLICATION_MESSAGES table.
+ *
+ * @author mlglenn on 12/12/2016.
  */
 @Entity
-@Table(name = "APPLICATION_MESSAGES", schema = "STOCKS", catalog = "")
+@Table(name = "APPLICATION_MESSAGES")  //@Table(name = "APPLICATION_MESSAGES", schema = "STOCKS", catalog = "")  TODO cleanup
 public class ApplicationMessagesEntity implements Serializable {
 
     private static final long serialVersionUID = 3848762733391793866L;

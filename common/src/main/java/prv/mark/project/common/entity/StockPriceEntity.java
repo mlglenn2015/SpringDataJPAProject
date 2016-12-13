@@ -12,10 +12,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * Created by mlglenn on 12/12/2016.
+ * JPA Entity for the STOCKS.STOCK_PRICE table.
+ *
+ * @author mlglenn on 12/12/2016.
  */
 @Entity
-@Table(name = "STOCK_PRICE", schema = "STOCKS", catalog = "")
+@Table(name = "STOCK_PRICE")  //@Table(name = "STOCK_PRICE", schema = "STOCKS", catalog = "") TODO cleanup
 public class StockPriceEntity implements Serializable {
 
     private static final long serialVersionUID = 450747588229003896L;

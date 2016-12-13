@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaSystemException;
 import prv.mark.project.common.domain.StockOrderDto;
+import prv.mark.project.common.entity.StockOrderEntity;
 import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.NumberUtils;
@@ -16,9 +17,10 @@ import javax.persistence.PersistenceException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 
 /**
  * JUnit tests for the {@link StockOrderRepository}.
@@ -54,7 +56,7 @@ public class StockOrderRepositoryTests extends AbstractAppTransactionalTest {
         assertNotNull(retStockOrder);
         assertTrue(retStockOrder.getId() > 0);
 
-        Optional<prv.mark.project.common.entity.StockOrderEntity> newStockOrder
+        Optional<StockOrderEntity> newStockOrder
                 = stockOrderRepository.findById(retStockOrder.getId());
         assertNotNull(newStockOrder);
 

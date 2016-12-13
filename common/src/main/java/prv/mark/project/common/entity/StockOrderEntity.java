@@ -15,10 +15,12 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Created by mlglenn on 12/12/2016.
+ * JPA Entity for the STOCKS.STOCK_ORDER table.
+ *
+ * @author mlglenn on 12/12/2016.
  */
 @Entity
-@Table(name = "STOCK_ORDER", schema = "STOCKS", catalog = "")
+@Table(name = "STOCK_ORDER")  //@Table(name = "STOCK_ORDER", schema = "STOCKS", catalog = "")  TODO cleanup
 public class StockOrderEntity implements Serializable {
 
     private static final long serialVersionUID = 4120673366782790956L;
