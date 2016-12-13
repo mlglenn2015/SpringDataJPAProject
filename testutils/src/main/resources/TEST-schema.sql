@@ -133,20 +133,23 @@ CREATE SEQUENCE SEQ_APPLICATION_PARAMETERS
 DROP TABLE IF EXISTS USERS;
 
 CREATE TABLE USERS (
-  ID          NUMERIC                          NOT NULL PRIMARY KEY,
-  --USER_ID     VARCHAR2(30)                        NOT NULL,
-  USER_NAME   VARCHAR(100)                       NOT NULL,
-  GROUP_ID    NUMERIC                          NOT NULL
+  USER_ID     VARCHAR(30)                        NOT NULL PRIMARY KEY,
+  USER_NAME   VARCHAR(100)                       NOT NULL
 );
 
 
 DROP TABLE IF EXISTS GROUPS;
 
 CREATE TABLE GROUPS (
-  ID          NUMERIC                          NOT NULL PRIMARY KEY,
-  --GROUP_ID    VARCHAR2(30)                        NOT NULL,
-  GROUP_NAME  VARCHAR(100)                       NOT NULL,
-  USER_ID     NUMERIC                          NOT NULL
+  GROUP_ID    VARCHAR(30)                        NOT NULL PRIMARY KEY,
+  GROUP_NAME  VARCHAR(100)                       NOT NULL
+);
+
+DROP TABLE IF EXISTS USERS_GROUPS;
+
+CREATE TABLE USERS_GROUPS (
+  USER_ID     VARCHAR(30)                        NOT NULL,
+  GROUP_ID    VARCHAR(30)                        NOT NULL
 );
 
 ----------------------------------------------------------------------------------------------------

@@ -39,8 +39,8 @@
     <entity class="prv.mark.project.common.entity.GroupsEntity">
         <table name="GROUPS" schema="STOCKS" catalog=""/>
         <attributes>
-            <id name="id">
-                <column name="ID" precision="10"/>
+            <id name="groupId">
+                <column name="GROUP_ID" length="30"/>
             </id>
             <basic name="groupName">
                 <column name="GROUP_NAME" length="100"/>
@@ -152,12 +152,23 @@
     <entity class="prv.mark.project.common.entity.UsersEntity">
         <table name="USERS" schema="STOCKS" catalog=""/>
         <attributes>
-            <id name="id">
-                <column name="ID" precision="10"/>
+            <id name="userId">
+                <column name="USER_ID" length="30"/>
             </id>
             <basic name="userName">
                 <column name="USER_NAME" length="100"/>
             </basic>
         </attributes>
     </entity>
+    <!--<entity class="prv.mark.project.common.entity.UsersGroupsEntity">
+        <table name="USERS_GROUPS" schema="STOCKS" catalog=""/>
+        <attributes>
+            <id name="userId">
+                <column name="USER_ID" length="30"/>
+            </id>
+            <id name="groupId">
+                <column name="GROUP_ID" length="30"/>
+            </id>
+        </attributes>
+    </entity>-->
 </entity-mappings>

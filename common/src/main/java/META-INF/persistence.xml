@@ -13,6 +13,7 @@
         <class>prv.mark.project.common.entity.TransactionLogEntity</class>
         <class>prv.mark.project.common.entity.TransactionTypesEntity</class>
         <class>prv.mark.project.common.entity.UsersEntity</class>
+        <!--<class>prv.mark.project.common.entity.UsersGroupsEntity</class>-->
         <properties>
             <property name="toplink.jdbc.url" value="jdbc:oracle:thin:@//localhost:1521/XE"/>
             <property name="toplink.jdbc.driver" value="oracle.jdbc.OracleDriver"/>

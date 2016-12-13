@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="prv.mark.project.common.entity.mlgGroupsEntity">
+        <table name="GROUPS" schema="STOCKS" catalog=""/>
+        <attributes>
+            <id name="groupId">
+                <column name="GROUP_ID" length="30"/>
+            </id>
+            <basic name="groupName">
+                <column name="GROUP_NAME" length="100"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="prv.mark.project.common.entity.mlgUsersEntity">
+        <table name="USERS" schema="STOCKS" catalog=""/>
+        <attributes>
+            <id name="userId">
+                <column name="USER_ID" length="30"/>
+            </id>
+            <basic name="userName">
+                <column name="USER_NAME" length="100"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="prv.mark.project.common.entity.mlgUsersGroupsEntity">
+        <table name="USERS_GROUPS" schema="STOCKS" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="ID" precision="10"/>
+            </id>
+        </attributes>
+    </entity>
+</entity-mappings>

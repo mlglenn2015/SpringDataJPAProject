@@ -14,7 +14,6 @@ import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.persistence.PersistenceException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
@@ -46,66 +45,66 @@ public class GroupsRepositoryTests extends AbstractAppTransactionalTest {
     }
 
     @Test
-    public void testGroupsRepository() {
-        prv.mark.project.common.entity.GroupsEntity entity = buildEntity();
-        entity.setId(100L);
+    public void testInsertGroups() {
+        GroupsEntity entity = buildGroupEntity("10000");
         assertNotNull(entity);
 
-        prv.mark.project.common.entity.GroupsEntity savedEntity = insertEntity(entity);
+        GroupsEntity savedEntity = insertEntity(entity);
         assertNotNull(savedEntity);
-        assertTrue(savedEntity.getId() > 0);
+        assertTrue(savedEntity.getGroupName().equals("TEST GROUP" + savedEntity.getGroupId()));
 
-        Optional<GroupsEntity> newEntity = groupsRepository.findById(savedEntity.getId());
+        Optional<GroupsEntity> newEntity = groupsRepository.findByGroupId(savedEntity.getGroupId());
         assertNotNull(newEntity);
 
-        assertEquals(newEntity.get().getGroupName(), "TEST GROUP");
+        assertEquals(newEntity.get().getGroupName(), "TEST GROUP" + newEntity.get().getGroupId());
         assertEquals(savedEntity.getGroupName(), newEntity.get().getGroupName());
     }
 
     @Test
-    public void testFindById() {
-        Optional<GroupsEntity> orderType = groupsRepository.findById(1L);
-        assertTrue(StringUtils.isNotEmpty(orderType.get().getGroupName()));
-    }
-
-    @Test
-    public void testFindByGroup() {
-        List<GroupsEntity> user = groupsRepository.findByGroupName("Administrators");
-        assertTrue(user.size() > 0);
+    public void testFindByGroupId() {
+        Optional<GroupsEntity> entity = groupsRepository.findByGroupId("00001");
+        assertTrue(StringUtils.isNotEmpty(entity.get().getGroupName()));
+        assertEquals(entity.get().getGroupName(), "Administrators");
     }
 
     @Test
     public void testFindByInvalidGroup() {
-        List<GroupsEntity> user = groupsRepository.findByGroupName("ZZZZZZZ");
-        assertTrue(user.size() == 0);
+        Optional<GroupsEntity> group = groupsRepository.findByGroupId("ZZZZZZZ");
+        assertEquals(Optional.ofNullable(group).get(), Optional.empty());
     }
 
+    /*@Test TODO
+    public void testFindAll() {
+        Optional<GroupsEntity> group = groupsRepository.findByGroupId("Administrators");
+        assertTrue(Optional.ofNullable(group.get().getGroupId()).isPresent());
+        assertEquals(group.get().getGroupId(), "00001");
+    }*/
 
-    private prv.mark.project.common.entity.GroupsEntity buildEntity() {
+    private GroupsEntity buildGroupEntity(final String id) {
         prv.mark.project.common.entity.GroupsEntity entity = new prv.mark.project.common.entity.GroupsEntity();
-        entity.setId(null);
-        entity.setGroupName("TEST GROUP");
-        UsersEntity usersEntity = new UsersEntity();
-        usersEntity.setId(1L);
-        usersEntity.setUserName("Mark User1");
-        //usersEntity.setGroupsEntitySet();
+        entity.setGroupId(id);
+        entity.setGroupName("TEST GROUP" + entity.getGroupId());
+
         Set<UsersEntity> usersEntitySet = new HashSet<>();
+        UsersEntity usersEntity = new UsersEntity();
+
+        usersEntity.setUserId("X10000");
+        usersEntity.setUserName("Test User");  //TODO add more users to this group
         usersEntitySet.add(usersEntity);
-        //entity.setUsersEntitySet(usersEntitySet); TODO
-        //entity.setUserId(1L);
+
+        entity.setUsers(usersEntitySet);
         return entity;
     }
 
-    private prv.mark.project.common.entity.GroupsEntity insertEntity(
-            final prv.mark.project.common.entity.GroupsEntity entity) {
+    private GroupsEntity insertEntity(final GroupsEntity entity) {
 
-        LOGGER.debug("UsersRepositoryTests.insertEntity()");
-        prv.mark.project.common.entity.GroupsEntity returnEntity = new prv.mark.project.common.entity.GroupsEntity();
+        LOGGER.debug("GroupsRepositoryTests.insertEntity()");
+        GroupsEntity returnEntity = new GroupsEntity();
         try {
             returnEntity = groupsRepository.saveAndFlush(entity);
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
-            String msg = "Exception caught while saving GroupsEntity entity " + entity.getId() + ".";
+            String msg = "Exception caught while saving GroupsEntity entity " + entity.getGroupId() + ".";
 
             ExceptionRouter.logAndThrowApplicationException(LOGGER, msg, e.toString());
         }

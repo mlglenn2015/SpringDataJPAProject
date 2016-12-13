@@ -1,7 +1,6 @@
 package prv.mark.project.common.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import prv.mark.project.common.entity.GroupsEntity;
 
@@ -16,13 +15,10 @@ import java.util.Optional;
 @Repository
 public interface GroupsRepository extends JpaRepository<GroupsEntity, Long> {
 
-    Optional<GroupsEntity> findById(Long id);
+    //Optional<GroupsEntity> findById(String id);
 
-    @Query("select g from GroupsEntity g where g.groupName = ?1")
-    List<GroupsEntity> findByGroupName(String groupName);
-
-    @Query("select g from GroupsEntity g where g.userId = ?1")
-    List<GroupsEntity> findByUserId(Long userId);
+    //@Query("select g from GroupsEntity g where g.groupId = ?1")
+    Optional<GroupsEntity> findByGroupId(String groupId);
 
     List<GroupsEntity> findAll();
 }

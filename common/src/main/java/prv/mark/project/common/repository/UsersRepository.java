@@ -1,7 +1,6 @@
 package prv.mark.project.common.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import prv.mark.project.common.entity.UsersEntity;
 
@@ -16,14 +15,10 @@ import java.util.Optional;
 @Repository
 public interface UsersRepository extends JpaRepository<UsersEntity, Long> {
 
-    Optional<UsersEntity> findById(Long id);
+    //Optional<UsersEntity> findById(String id);
 
-    @Query("select u from UsersEntity u where u.userName = ?1")
-    List<UsersEntity> findByUserName(String userName);
-
-    @Query("select u from UsersEntity u where u.groupId = ?1")
-    List<UsersEntity> findByGroupId(Long groupId);
+    //@Query("select u from UsersEntity u where u.userName = ?1")
+    Optional<UsersEntity> findByUserId(String userId);
 
     List<UsersEntity> findAll();
-
 }

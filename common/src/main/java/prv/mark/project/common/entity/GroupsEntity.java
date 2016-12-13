@@ -4,13 +4,16 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * JPA Entity for the STOCKS.GROUPS table.
  *
  * http://stackoverflow.com/questions/1082095/how-to-remove-entity-with-manytomany-relationship-in-jpa-and-corresponding-join?rq=1
+ * https://en.wikibooks.org/wiki/Java_Persistence/ManyToMany
  *
  * @author mlglenn on 12/12/2016.
  */
@@ -41,25 +44,24 @@ public class GroupsEntity implements Serializable {
     private static final long serialVersionUID = -2769750154242294344L;
 
     @Id
-    @Column(name = "ID", nullable = false, precision = 0)
-    private Long id;
+    @Column(name = "GROUP_ID", nullable = false, length = 30)
+    private String groupId;
 
     @Basic
     @Column(name = "GROUP_NAME", nullable = false, length = 100)
     private String groupName;
 
-    //private Long userId;
-    //@ManyToMany(mappedBy="groupsEntitySet")
-    //Set<UsersEntity> usersEntitySet;
+    @ManyToMany(mappedBy="groups")
+    Set<UsersEntity> users;
 
 
 
-    public Long getId() {
-        return id;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
     public String getGroupName() {
@@ -70,23 +72,13 @@ public class GroupsEntity implements Serializable {
         this.groupName = groupName;
     }
 
-    /*@Basic
-    @Column(name = "USER_ID", nullable = false, precision = 0)
-    public Long getUserId() {
-        return userId;
+    public Set<UsersEntity> getUsers() {
+        return users;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }*/
-
-    /*public Set<UsersEntity> getUsersEntitySet() {
-        return usersEntitySet;
+    public void setUsers(Set<UsersEntity> usersEntitySet) {
+        this.users = usersEntitySet;
     }
-
-    public void setUsersEntitySet(Set<UsersEntity> usersEntitySet) {
-        this.usersEntitySet = usersEntitySet;
-    }*/
 
     @Override
     public boolean equals(Object o) {
@@ -95,23 +87,21 @@ public class GroupsEntity implements Serializable {
 
         GroupsEntity that = (GroupsEntity) o;
 
-        if (!getId().equals(that.getId())) return false;
-        return getGroupName().equals(that.getGroupName());
+        return getGroupId().equals(that.getGroupId());
 
     }
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getGroupName().hashCode();
-        return result;
+        return getGroupId().hashCode();
     }
 
     @Override
     public String toString() {
         return "GroupsEntity{" +
-                "id=" + id +
+                "groupId='" + groupId + '\'' +
                 ", groupName='" + groupName + '\'' +
+                ", users=" + users +
                 '}';
     }
 }

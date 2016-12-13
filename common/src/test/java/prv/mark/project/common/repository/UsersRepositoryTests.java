@@ -5,23 +5,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.JpaSystemException;
-import prv.mark.project.common.entity.GroupsEntity;
-import prv.mark.project.common.entity.UsersEntity;
-import prv.mark.project.common.exception.ExceptionRouter;
-import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
-import javax.persistence.PersistenceException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit tests for the {@link UsersRepository}.
@@ -45,7 +31,7 @@ public class UsersRepositoryTests extends AbstractAppTransactionalTest {
         LOGGER.debug("UsersRepositoryTests.defaultTest()");
     }
 
-    @Test
+    /*@Test TODO
     public void testUsersRepository() {
         prv.mark.project.common.entity.UsersEntity entity = buildEntity();
         entity.setId(100L);
@@ -113,5 +99,5 @@ public class UsersRepositoryTests extends AbstractAppTransactionalTest {
         LOGGER.debug(returnEntity.toString());
 
         return returnEntity;
-    }
+    }*/
 }
