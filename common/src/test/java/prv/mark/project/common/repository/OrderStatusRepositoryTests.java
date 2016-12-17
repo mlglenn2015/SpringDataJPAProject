@@ -80,7 +80,8 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
 
 
     private prv.mark.project.common.entity.OrderStatusEntity buildEntity() {
-        prv.mark.project.common.entity.OrderStatusEntity entity = new prv.mark.project.common.entity.OrderStatusEntity();
+        prv.mark.project.common.entity.OrderStatusEntity entity =
+                new prv.mark.project.common.entity.OrderStatusEntity(null, "TESTING", "ORDER IN TESTING STATUS");
         entity.setId(null);
         entity.setOrderStatus("TESTING");
         entity.setDescription("ORDER IN TESTING STATUS");
@@ -91,18 +92,17 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
             final prv.mark.project.common.entity.OrderStatusEntity entity) {
 
         LOGGER.debug("OrderStatusRepositoryTests.insertEntity()");
-        prv.mark.project.common.entity.OrderStatusEntity returnEntity = new prv.mark.project.common.entity.OrderStatusEntity();
         try {
-            returnEntity = orderStatusRepository.saveAndFlush(entity);
+            prv.mark.project.common.entity.OrderStatusEntity returnEntity = orderStatusRepository.saveAndFlush(entity);
+            LOGGER.debug("*** Saved OrderStatus entity ***");
+            LOGGER.debug(returnEntity.toString());
+            return returnEntity;
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
             String msg = "Exception caught while saving OrderStatus entity " + entity.getId() + ".";
 
             ExceptionRouter.logAndThrowApplicationException(LOGGER, msg, e.toString());
         }
-        LOGGER.debug("*** Saved OrderStatus entity ***");
-        LOGGER.debug(returnEntity.toString());
-
-        return returnEntity;
+        return null;
     }
 }

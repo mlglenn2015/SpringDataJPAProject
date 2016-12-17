@@ -6,23 +6,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import prv.mark.project.common.config.TestCommonConfig;
 import prv.mark.project.common.domain.USPostalAddress;
+import prv.mark.project.testutils.config.TestUtilConfig;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+
 
 /**
  * Unit tests for US Address validation.
  *
  * Created by mlglenn on 11/15/2016.
  */
-@ContextConfiguration(classes = TestCommonConfig.class)
+@ContextConfiguration(classes = {TestUtilConfig.class})
 public class USAddressValidationTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(USAddressValidationTests.class);
@@ -42,7 +45,7 @@ public class USAddressValidationTests extends AbstractAppTransactionalTest {
                     .isPresent();*/
 
     @Autowired
-    private Validator validator;
+    private Validator validator; //declared in TestCommonConfig class
 
     @Before
     public void setUp() {

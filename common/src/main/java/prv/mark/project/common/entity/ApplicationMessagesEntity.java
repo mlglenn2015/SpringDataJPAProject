@@ -24,6 +24,17 @@ public class ApplicationMessagesEntity implements Serializable {
     private String messageKey;
     private String message;
 
+    protected ApplicationMessagesEntity() {
+        // no-args constructor required by JPA spec
+        // this one is protected since it shouldn't be used directly
+    }
+
+    public ApplicationMessagesEntity(Long id, String messageKey, String message) {
+        this.id = id;
+        this.messageKey = messageKey;
+        this.message = message;
+    }
+
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
     @SequenceGenerator(name = "SEQ_APPLICATION_MESSAGES", sequenceName = "SEQ_APPLICATION_MESSAGES", allocationSize = 1)

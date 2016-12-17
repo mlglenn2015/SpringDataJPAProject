@@ -54,6 +54,16 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
+     * Return a boolean based on the given string is numeric.
+     *
+     * @param str {@link java.lang.String} to evaluate
+     * @return boolean
+     */
+    public static boolean isNumeric(String str) {
+        return org.apache.commons.lang3.StringUtils.isNumeric(str);
+    }
+
+    /**
      * Return the value of the given string, or an empty string if given string is empty or null.
      *
      * @param str {@link String} to evaluate

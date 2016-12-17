@@ -1,15 +1,19 @@
 package prv.mark.project.common.util;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ContextConfiguration;
+import prv.mark.project.testutils.config.TestUtilConfig;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import java.math.BigDecimal;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -17,12 +21,28 @@ import static org.junit.Assert.assertEquals;
  *
  * Created by mlglenn on 11/15/2016.
  */
+@ContextConfiguration(classes = {TestUtilConfig.class})
 public class NumberUtilsTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NumberUtilsTests.class);
 
+
+    @Override
+    @Before
+    public void setUp() {
+        LOGGER.debug("NumberUtilsTests.setUp(): -----> CREATE <-----");
+    }
+
+    @Override
+    @After
+    public void tearDown() {
+        LOGGER.debug("NumberUtilsTests.tearDown(): -----> DESTROY <-----");
+    }
+
     @Test
-    public void defaultTest() {}
+    public void defaultTest() {
+        LOGGER.debug("NumberUtilsTests.defaultTest()");
+    }
 
     @Test
     public void testBigDecimalWithDouble() {
@@ -59,7 +79,7 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
     @Test
     public void testToInt() {
         String val = "123";
-        assertTrue(NumberUtils.isNumber(val));
+        assertTrue(StringUtils.isNumeric(val));
         BigDecimal bigDecimal = NumberUtils.toBigDecimal(NumberUtils.toInt(val));
         assertNotNull(bigDecimal);
         LOGGER.debug("Value is {}", bigDecimal);
@@ -68,7 +88,7 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
     @Test
     public void testToLong() {
         String val = "456";
-        assertTrue(NumberUtils.isNumber(val));
+        assertTrue(StringUtils.isNumeric(val));
         BigDecimal bigDecimal = NumberUtils.toBigDecimal(NumberUtils.toLong(val));
         assertNotNull(bigDecimal);
         LOGGER.debug("Value is {}", bigDecimal);

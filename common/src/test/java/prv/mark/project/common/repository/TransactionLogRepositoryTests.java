@@ -95,10 +95,9 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
     }
 
     private prv.mark.project.common.entity.TransactionLogEntity buildEntity(final TransactionDto dto) {
-        prv.mark.project.common.entity.TransactionLogEntity entity = new prv.mark.project.common.entity.TransactionLogEntity();
-        entity.setId(null);
-        entity.setLogDateTime(DateUtils.getDateFromLocalDateTime(dto.getLogDateTime()));
-        entity.setTransactionType(dto.getTransactionType());
+        prv.mark.project.common.entity.TransactionLogEntity entity =
+                new prv.mark.project.common.entity.TransactionLogEntity(
+                        null, DateUtils.getDateFromLocalDateTime(dto.getLogDateTime()), dto.getTransactionType());
         return entity;
     }
 
@@ -106,9 +105,11 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
             final prv.mark.project.common.entity.TransactionLogEntity entity) {
 
         LOGGER.debug("TransactionLogRepositoryTests.insertEntity()");
-        prv.mark.project.common.entity.TransactionLogEntity returnEntity = new prv.mark.project.common.entity.TransactionLogEntity();
         try {
-            returnEntity = transactionLogRepository.saveAndFlush(entity);
+            prv.mark.project.common.entity.TransactionLogEntity returnEntity = transactionLogRepository.saveAndFlush(entity);
+            LOGGER.debug("*** Saved TransactionLog entity ***");
+            LOGGER.debug(returnEntity.toString());
+            return returnEntity;
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
             String msg = "Exception caught while saving StockPrice entity "
@@ -116,10 +117,7 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
 
             ExceptionRouter.logAndThrowApplicationException(LOGGER, msg, e.toString());
         }
-        LOGGER.debug("*** Saved TransactionLog entity ***");
-        LOGGER.debug(returnEntity.toString());
-
-        return returnEntity;
+        return null;
     }
 
 }

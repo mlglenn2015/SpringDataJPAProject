@@ -29,6 +29,19 @@ public class ApplicationParametersEntity implements Serializable {
     private String enabled;
     private Date created;
 
+    protected ApplicationParametersEntity() {
+        // no-args constructor required by JPA spec
+        // this one is protected since it shouldn't be used directly
+    }
+
+    public ApplicationParametersEntity(Long id, String key, String property, String enabled, Date created) {
+        this.id = id;
+        this.key = key;
+        this.property = property;
+        this.enabled = enabled;
+        this.created = created;
+    }
+
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
     @SequenceGenerator(name = "SEQ_APPLICATION_PARAMETERS", sequenceName = "SEQ_APPLICATION_PARAMETERS", allocationSize = 1)

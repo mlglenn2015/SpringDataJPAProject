@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * Created by mlglenn on 10/24/2016.
  */
 //public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
-public final class NumberUtils extends org.apache.commons.lang.math.NumberUtils {
+public final class NumberUtils { //extends org.apache.commons.lang3.math.NumberUtils {
 
     /**
      * Converts a {@link Double} to {@link BigDecimal}.
@@ -76,7 +76,7 @@ public final class NumberUtils extends org.apache.commons.lang.math.NumberUtils 
         if (value == null) {
             return new BigDecimal("0.00");
         }
-        if (isNumber(value)) {
+        if (StringUtils.isNumeric(value)) {
             return new BigDecimal(value).setScale(12, BigDecimal.ROUND_HALF_UP);
         } else {
             return new BigDecimal("0.00");
@@ -90,9 +90,9 @@ public final class NumberUtils extends org.apache.commons.lang.math.NumberUtils 
      */
     public static float toFloat(final String val) {
         if (val != null) {
-            return org.apache.commons.lang.math.NumberUtils.toFloat(val);
+            return org.apache.commons.lang3.math.NumberUtils.toFloat(val);
         }
-        return org.apache.commons.lang.math.NumberUtils.toFloat("0.00");
+        return org.apache.commons.lang3.math.NumberUtils.toFloat("0.00");
     }
 
     /**
@@ -103,7 +103,7 @@ public final class NumberUtils extends org.apache.commons.lang.math.NumberUtils 
      */
     public static int toInt(final String str) {
 
-        return org.apache.commons.lang.math.NumberUtils.toInt(str, 0);
+        return org.apache.commons.lang3.math.NumberUtils.toInt(str, 0);
     }
 
     /**
@@ -113,7 +113,7 @@ public final class NumberUtils extends org.apache.commons.lang.math.NumberUtils 
      * @return {@link Long} containing the Long numeric value, or a 0 if it fails
      */
     public static long toLong(final String str) {
-        return org.apache.commons.lang.math.NumberUtils.toLong(str, 0L);
+        return org.apache.commons.lang3.math.NumberUtils.toLong(str, 0L);
     }
 
     /**
@@ -129,14 +129,16 @@ public final class NumberUtils extends org.apache.commons.lang.math.NumberUtils 
     }
 
     /**
+     * Deprecated.
+     *
      * Checks whether a {@link String} a valid Java number.
      *
      * @param str {@link String} the <code>String</code> to check
      * @return <code>true</code> if the string is a correctly formatted number
      */
-    public static boolean isNumber(final String str) {
-        return org.apache.commons.lang.math.NumberUtils.isNumber(str);
-    }
+    /*public static boolean isNumber(final String str) {
+        return org.apache.commons.lang3.math.NumberUtils.isNumber(str);
+    }*/
 
 
     /**

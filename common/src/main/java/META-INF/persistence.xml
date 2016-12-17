@@ -7,13 +7,11 @@
         <class>prv.mark.project.common.entity.ApplicationParametersEntity</class>
         <class>prv.mark.project.common.entity.GroupsEntity</class>
         <class>prv.mark.project.common.entity.OrderStatusEntity</class>
-        <class>prv.mark.project.common.entity.OrderTypesEntity</class>
-        <class>prv.mark.project.common.entity.StockOrderEntity</class>
-        <class>prv.mark.project.common.entity.StockPriceEntity</class>
         <class>prv.mark.project.common.entity.TransactionLogEntity</class>
-        <class>prv.mark.project.common.entity.TransactionTypesEntity</class>
         <class>prv.mark.project.common.entity.UsersEntity</class>
-        <!--<class>prv.mark.project.common.entity.UsersGroupsEntity</class>-->
+        <class>prv.mark.project.common.entity.CompanyEntity</class>
+        <class>prv.mark.project.common.entity.ClientEntity</class>
+        <class>prv.mark.project.common.entity.EmployeeEntity</class>
         <properties>
             <property name="toplink.jdbc.url" value="jdbc:oracle:thin:@//localhost:1521/XE"/>
             <property name="toplink.jdbc.driver" value="oracle.jdbc.OracleDriver"/>

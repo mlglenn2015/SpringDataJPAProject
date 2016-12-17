@@ -1,10 +1,12 @@
 package prv.mark.project.common.util;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
-import prv.mark.project.common.config.TestCommonConfig;
+import prv.mark.project.testutils.config.TestUtilConfig;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -17,15 +19,33 @@ import java.util.Date;
 
 import static org.junit.Assert.assertNotNull;
 
-@ContextConfiguration(classes = {TestCommonConfig.class})
+
+/**
+ * Unit tests for the {@link prv.mark.project.common.util.DateUtils} class.
+ *
+ * @author MLGlenn.
+ */
+@ContextConfiguration(classes = {TestUtilConfig.class})
 public class DateUtilsTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilsTests.class);
 
 
+    @Override
+    @Before
+    public void setUp() {
+        LOGGER.debug("DateUtilsTests.setUp(): -----> CREATE <-----");
+    }
+
+    @Override
+    @After
+    public void tearDown() {
+        LOGGER.debug("DateUtilsTests.tearDown(): -----> DESTROY <-----");
+    }
+
     @Test
     public void defaultTest() {
-
+        LOGGER.debug("DateUtilsTests.defaultTest()");
     }
 
     @Test

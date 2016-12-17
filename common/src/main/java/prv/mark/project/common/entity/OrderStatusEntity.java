@@ -24,6 +24,17 @@ public class OrderStatusEntity implements Serializable {
     private String orderStatus;
     private String description;
 
+    protected OrderStatusEntity() {
+        // no-args constructor required by JPA spec
+        // this one is protected since it shouldn't be used directly
+    }
+
+    public OrderStatusEntity(Long id, String orderStatus, String description) {
+        this.id = id;
+        this.orderStatus = orderStatus;
+        this.description = description;
+    }
+
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
     @SequenceGenerator(

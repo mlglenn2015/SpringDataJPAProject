@@ -1,8 +1,5 @@
 package prv.mark.project.common.exception;
 
-import org.springframework.ws.soap.server.endpoint.annotation.FaultCode;
-import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
-
 /**
  * Specialized exception that translates to a SOAP Fault when thrown.
  *
@@ -13,7 +10,7 @@ import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
  *
  * @author mlglenn.
  */
-@SoapFault(faultCode = FaultCode.SERVER)
+//@SoapFault(faultCode = FaultCode.SERVER)
 public class SOAPServerException extends SOAPException {
 
     public SOAPServerException(final String message) {

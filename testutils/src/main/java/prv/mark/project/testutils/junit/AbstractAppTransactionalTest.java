@@ -18,17 +18,14 @@ import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.transaction.annotation.Transactional;
 import prv.mark.project.testutils.config.TestDataConfig;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 /**
  * Generic transactional unit test foundation.
- * <p> Most NBI Unit tests will derive from this class, as it provides database and transactional facilities used by
- * the applciation. </p>
+ * <p> Provides database and transactional facilities used by the applciation. </p>
  * <p> NOTE: Classes deriving from this class <b><i>must provide</i></b> the
- * {@link ContextConfiguration} annotation specific to the particular test's Spring configuration. </p>
+ * {@link org.springframework.test.context.ContextConfiguration} annotation specific to the
+ * particular test's Spring configuration. </p>
  *
- * @author mlglenn
+ * @author mlglenn.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestDataConfig.class})
@@ -36,24 +33,15 @@ import javax.annotation.PreDestroy;
 @ActiveProfiles("test")
 @DirtiesContext
 @Transactional
-public abstract class AbstractAppTransactionalTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class AbstractAppTransactionalTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAppTransactionalTest.class);
-
-    /**
-     * Method called after instantiation of this object.
-     */
-    @PostConstruct
-    public static void postConstruct() {
-        LOGGER.debug("@PostConstruct:AbstractAppTransactionalTest.postConstruct()");
-    }
 
     /**
      * Method used to bootstrap test class.
      */
     @BeforeClass
     public static void bootstrap() {
-        LOGGER.debug("@BeforeClass:AbstractAppTransactionalTest.bootstrap()");
     }
 
     /**
@@ -61,7 +49,6 @@ public abstract class AbstractAppTransactionalTest extends AbstractTransactional
      */
     @AfterClass
     public static void destroy() {
-        LOGGER.debug("@AfterClass:AbstractAppTransactionalTest.destroy()");
     }
 
     /**
@@ -71,7 +58,6 @@ public abstract class AbstractAppTransactionalTest extends AbstractTransactional
      */
     @Before
     public void setUp() {
-        LOGGER.debug("@Before:AbstractAppTransactionalTest.setUp()");
     }
 
     /**
@@ -79,27 +65,16 @@ public abstract class AbstractAppTransactionalTest extends AbstractTransactional
      */
     @After
     public void tearDown() {
-        LOGGER.debug("@After:AbstractAppTransactionalTest.tearDown()");
     }
 
     @BeforeTransaction
     public void beforeTransaction() {
-        LOGGER.debug("@BeforeTransaction:AbstractAppTransactionalTest.beforeTransaction()");
         LOGGER.trace("Starting transaction");
     }
 
     @AfterTransaction
     public void afterTransaction() {
-        LOGGER.debug("@AfterTransaction:AbstractAppTransactionalTest.afterTransaction()");
         LOGGER.trace("End of transaction");
-    }
-
-    /**
-     * Method called before destruction of this object.
-     */
-    @PreDestroy
-    public static void preDestroy() {
-        LOGGER.debug("@PreDestroy:AbstractAppTransactionalTest.preDestroy()");
     }
 
 }

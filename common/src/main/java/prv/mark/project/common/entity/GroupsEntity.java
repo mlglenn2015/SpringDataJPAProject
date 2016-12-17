@@ -4,28 +4,38 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 
 /**
  * JPA Entity for the STOCKS.GROUPS table.
  *
+ * http://blog.jbaysolutions.com/2012/12/17/jpa-2-relationships-many-to-many/
+ *
  * http://stackoverflow.com/questions/1082095/how-to-remove-entity-with-manytomany-relationship-in-jpa-and-corresponding-join?rq=1
+ *
  * https://en.wikibooks.org/wiki/Java_Persistence/ManyToMany
+ *
+ * https://github.com/olivergierke/repositories-deepdive/blob/master/src/main/java/de/olivergierke/deepdive/EmailAddress.java
  *
  * @author mlglenn on 12/12/2016.
  */
 @Entity
-@Table(name = "GROUPS")   //@Table(name = "GROUPS", schema = "STOCKS", catalog = "")  TODO cleanup
+@Table(name = "GROUPS")
 public class GroupsEntity implements Serializable {
 
     /*
     The ownership of the relation is determined by where you place the 'mappedBy' attribute to the annotation.
-    The entity you put 'mappedBy' is the one which is NOT the owner. There's no chance for both sides to be
-    owners. If you don't have a 'delete user' use-case you could simply move the ownership to the Group entity,
-    as currently the User is the owner.
+    The entity you put 'mappedBy' is the one which is NOT the owner.
+
+    There's no chance for both sides to be owners. If you don't have a 'delete user' use-case you could simply
+    move the ownership to the Group entity, as currently the User is the owner.
+
     On the other hand, you haven't been asking about it, but one thing worth to know. The groups and users are
     not combined with each other. I mean, after deleting User1 instance from Group1.users, the User1.groups
     collections is not changed automatically (which is quite surprising for me),
@@ -51,10 +61,31 @@ public class GroupsEntity implements Serializable {
     @Column(name = "GROUP_NAME", nullable = false, length = 100)
     private String groupName;
 
-    @ManyToMany(mappedBy="groups")
-    Set<UsersEntity> users;
+    //@ManyToMany(mappedBy="groups") TODO remove
+    // The entity you put 'mappedBy' is the one which is NOT the owner
+    @ManyToMany
+    @JoinTable(
+            name="USERS_GROUPS",
+            joinColumns=@JoinColumn(name="GROUP_ID", referencedColumnName="GROUP_ID"),
+            inverseJoinColumns=@JoinColumn(name="USER_ID", referencedColumnName="USER_ID"))
+    private Collection<UsersEntity> usersCollection;
 
 
+    protected GroupsEntity() {
+        // no-args constructor required by JPA spec
+        // this one is protected since it shouldn't be used directly
+    }
+
+    public GroupsEntity(String groupId, String groupName) {
+        this.groupId = groupId;
+        this.groupName = groupName;
+    }
+
+    public GroupsEntity(String groupId, String groupName, Collection<UsersEntity> usersCollection) {
+        this.groupId = groupId;
+        this.groupName = groupName;
+        this.usersCollection = usersCollection;
+    }
 
     public String getGroupId() {
         return groupId;
@@ -72,12 +103,13 @@ public class GroupsEntity implements Serializable {
         this.groupName = groupName;
     }
 
-    public Set<UsersEntity> getUsers() {
-        return users;
+    @XmlTransient
+    public Collection<UsersEntity> getUsersCollection() {
+        return usersCollection;
     }
 
-    public void setUsers(Set<UsersEntity> usersEntitySet) {
-        this.users = usersEntitySet;
+    public void setUsersCollection(Collection<UsersEntity> usersCollection) {
+        this.usersCollection = usersCollection;
     }
 
     @Override
@@ -101,7 +133,7 @@ public class GroupsEntity implements Serializable {
         return "GroupsEntity{" +
                 "groupId='" + groupId + '\'' +
                 ", groupName='" + groupName + '\'' +
-                ", users=" + users +
+                ", usersCollection=" + usersCollection +
                 '}';
     }
 }

@@ -15,8 +15,6 @@ import java.util.Optional;
 @Repository
 public interface GroupsRepository extends JpaRepository<GroupsEntity, Long> {
 
-    //Optional<GroupsEntity> findById(String id);
-
     //@Query("select g from GroupsEntity g where g.groupId = ?1")
     Optional<GroupsEntity> findByGroupId(String groupId);
 

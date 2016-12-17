@@ -21,6 +21,7 @@ public class UsersRepositoryTests extends AbstractAppTransactionalTest {
     @Autowired
     private UsersRepository usersRepository;
 
+    @Override
     @Before
     public void setUp() {
         assertNotNull(usersRepository);

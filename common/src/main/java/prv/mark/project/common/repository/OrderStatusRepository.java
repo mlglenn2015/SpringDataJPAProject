@@ -1,7 +1,6 @@
 package prv.mark.project.common.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import prv.mark.project.common.entity.OrderStatusEntity;
 
@@ -18,7 +17,7 @@ public interface OrderStatusRepository extends JpaRepository<OrderStatusEntity, 
 
     Optional<OrderStatusEntity> findById(Long id);
 
-    @Query("select o from OrderStatusEntity o where o.orderStatus = ?1")
+    //@Query("select o from OrderStatusEntity o where o.orderStatus = ?1")
     Optional<prv.mark.project.common.entity.OrderStatusEntity> findByOrderStatus(String orderStatus);
 
     List<OrderStatusEntity> findAll();

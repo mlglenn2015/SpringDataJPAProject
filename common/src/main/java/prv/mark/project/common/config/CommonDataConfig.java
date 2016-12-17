@@ -32,7 +32,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = {"prv.mark.project"})
 @EnableJpaRepositories(basePackages = {"prv.mark.project.common.repository"})
 @EnableTransactionManagement
-@PropertySource("classpath:/common.properties")
+@PropertySource("classpath:common.properties")
 @Profile({"local", "dev", "qatest", "staging", "production"})
 public class CommonDataConfig {
 
@@ -40,8 +40,8 @@ public class CommonDataConfig {
 
     @Value("${spring.jpa.show-sql}")
     private String showSql;
-    @Value("${application.id}")
-    private String applicationId;
+    //@Value("${application.id}")
+    //private String applicationId;
     @Value("${application.jndi.datasource}")
     private String applicationJndiDataSource; //private static final String DS_JNDI = "jdbc/stockTickerDataSource";
 
@@ -56,7 +56,7 @@ public class CommonDataConfig {
 
         LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
         emfb.setDataSource(dataSource());
-        emfb.setPackagesToScan("prv.mark.project");
+        emfb.setPackagesToScan("prv.mark.project.common.entity");
         AbstractJpaVendorAdapter jpaVendorAdapter = new EclipseLinkJpaVendorAdapter();
         jpaVendorAdapter.setShowSql(Boolean.valueOf(showSql));
         //jpaVendorAdapter.setShowSql(false);

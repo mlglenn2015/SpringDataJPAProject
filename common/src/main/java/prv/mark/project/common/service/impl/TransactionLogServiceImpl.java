@@ -10,7 +10,6 @@ import prv.mark.project.common.entity.TransactionLogEntity;
 import prv.mark.project.common.repository.TransactionLogRepository;
 import prv.mark.project.common.service.TransactionLogService;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -69,9 +68,9 @@ public class TransactionLogServiceImpl implements TransactionLogService {
         //return new TransactionLog();
     }
 
-    private List<TransactionLogEntity> nullList() {
+    /*private List<TransactionLogEntity> nullList() {
         List<TransactionLogEntity> list = new ArrayList<>();
         list.add(new TransactionLogEntity());
         return list;
-    }
+    }*/
 }

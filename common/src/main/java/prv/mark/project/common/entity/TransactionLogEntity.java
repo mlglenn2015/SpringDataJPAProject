@@ -28,6 +28,24 @@ public class TransactionLogEntity implements Serializable {
     private String transactionType;
     private String transactionData;
 
+    protected TransactionLogEntity() {
+        // no-args constructor required by JPA spec
+        // this one is protected since it shouldn't be used directly
+    }
+
+    public TransactionLogEntity(Long id, Date logDateTime, String transactionType) {
+        this.id = id;
+        this.logDateTime = logDateTime;
+        this.transactionType = transactionType;
+    }
+
+    public TransactionLogEntity(Long id, Date logDateTime, String transactionType, String transactionData) {
+        this.id = id;
+        this.logDateTime = logDateTime;
+        this.transactionType = transactionType;
+        this.transactionData = transactionData;
+    }
+
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
     @SequenceGenerator(

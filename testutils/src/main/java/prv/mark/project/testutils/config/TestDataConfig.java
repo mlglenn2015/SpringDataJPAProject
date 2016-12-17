@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -25,18 +26,25 @@ import java.util.Properties;
 /**
  * Spring Data Test Configuration.
  *
+ * https://github.com/olivergierke/repositories-deepdive/blob/master/src/main/java/de/olivergierke/deepdive/ApplicationConfig.java
+ *
  * @author mlglenn on 12/12/2016.
  */
 @Configuration
 @ComponentScan(basePackages = {"prv.mark.project"})
 @EnableJpaRepositories(basePackages = {"prv.mark.project.common.repository"})
 @EnableTransactionManagement
-@PropertySource("classpath:/testutils-common.properties")
+@PropertySources({
+        @PropertySource("classpath:/TEST.properties")
+})
 @Profile({"test"})
 public class TestDataConfig {
 
     @Value("${application.jpa.logging:SEVERE}")
     private String jpaLogging;
+
+    @Value("${application.jpa.show-sql}")
+    private String showSql;
 
     @Bean
     public DataSource dataSource() {
@@ -51,11 +59,6 @@ public class TestDataConfig {
         JdbcTemplate template = new JdbcTemplate();
         template.setDataSource(dataSource());
         return template;
-    }
-
-    @Bean
-    public DataSource appDataSource() {
-        return dataSource();
     }
 
     @Bean

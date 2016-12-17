@@ -4,22 +4,25 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 
 /**
  * JPA Entity for the STOCKS.USERS table.
  *
+ * http://blog.jbaysolutions.com/2012/12/17/jpa-2-relationships-many-to-many/
+ *
  * https://en.wikibooks.org/wiki/Java_Persistence/ManyToMany
+ *
+ * https://github.com/olivergierke/repositories-deepdive/blob/master/src/main/java/de/olivergierke/deepdive/EmailAddress.java
  *
  * @author mlglenn on 12/12/2016.
  */
 @Entity
-@Table(name = "USERS") //@Table(name = "USERS", schema = "STOCKS", catalog = "") TODO cleanup
+@Table(name = "USERS")
 public class UsersEntity implements Serializable {
 
     private static final long serialVersionUID = 9157226449683413471L;
@@ -32,13 +35,27 @@ public class UsersEntity implements Serializable {
     @Column(name = "USER_NAME", nullable = false, length = 100)
     private String userName;
 
-    @ManyToMany
-    @JoinTable(
-            name="USERS_GROUPS",
-            joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="USER_ID"),
-            inverseJoinColumns=@JoinColumn(name="GROUP_ID", referencedColumnName="GROUP_ID"))
-    private Set<GroupsEntity> groups;
 
+    // The entity you put 'mappedBy' is the one which is NOT the owner
+    @ManyToMany(mappedBy = "usersCollection")  //GroupsEntity.usersCollection
+    private Collection<GroupsEntity> groupsCollection;
+
+
+    protected UsersEntity() {
+        // no-args constructor required by JPA spec
+        // this one is protected since it shouldn't be used directly
+    }
+
+    public UsersEntity(String userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
+
+    public UsersEntity(String userId, String userName, Collection<GroupsEntity> groupsCollection) {
+        this.userId = userId;
+        this.userName = userName;
+        this.groupsCollection = groupsCollection;
+    }
 
     public String getUserId() {
         return userId;
@@ -56,12 +73,13 @@ public class UsersEntity implements Serializable {
         this.userName = userName;
     }
 
-    public Set<GroupsEntity> getGroups() {
-        return groups;
+    @XmlTransient
+    public Collection<GroupsEntity> getGroupsCollection() {
+        return groupsCollection;
     }
 
-    public void setGroups(Set<GroupsEntity> groups) {
-        this.groups = groups;
+    public void setGroupsCollection(Collection<GroupsEntity> groupsCollection) {
+        this.groupsCollection = groupsCollection;
     }
 
     @Override
@@ -85,7 +103,7 @@ public class UsersEntity implements Serializable {
         return "UsersEntity{" +
                 "userId='" + userId + '\'' +
                 ", userName='" + userName + '\'' +
-                ", groups=" + groups +
+                ", groupsCollection=" + groupsCollection +
                 '}';
     }
 }

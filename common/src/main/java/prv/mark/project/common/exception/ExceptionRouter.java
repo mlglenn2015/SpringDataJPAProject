@@ -1,8 +1,8 @@
 package prv.mark.project.common.exception;
 
-import prv.mark.project.common.util.StringUtils;
 import org.slf4j.Logger;
-import org.springframework.ws.soap.client.SoapFaultClientException;
+//import org.springframework.ws.soap.client.SoapFaultClientException;
+import prv.mark.project.common.util.StringUtils;
 
 /**
  * Routes exceptions to the proper handler depending on fault type.
@@ -22,11 +22,11 @@ public class ExceptionRouter {
      * @param message {@link String}
      * @param e thrown {@link SoapFaultClientException}
      */
-    public static void route(final Logger logger, final String message,
+    /*public static void route(final Logger logger, final String message,
                               final SoapFaultClientException e) {
         logger.trace(message, e);
         route(e);
-    }
+    }*/
 
     /**
      * Routes a {@link SoapFaultClientException} to the proper SOAP Fault type depending on fault
@@ -34,14 +34,14 @@ public class ExceptionRouter {
      *
      * @param e thrown {@link SoapFaultClientException}
      */
-    public static void route(final SoapFaultClientException e) {
+    /*public static void route(final SoapFaultClientException e) {
         if ((e.getFaultCode() != null)
                 && (StringUtils.containsIgnoreCase(e.getFaultCode().toString(), SERVER_FAULT_STR))) {
             throw new SOAPServerException(e.getMessage());
         } else {
             throw new SOAPClientException(e.getMessage());
         }
-    }
+    }*/
 
     /**
      * Logs and rethrows the given {@link SOAPException}.
