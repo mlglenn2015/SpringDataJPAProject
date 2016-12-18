@@ -114,10 +114,10 @@
         </attributes>
     </entity>
     <entity class="prv.mark.project.common.entity.EmployeeEntity">
-        <table name="USERS" schema="STOCKS" catalog=""/>
+        <table name="EMPLOYEE" schema="STOCKS" catalog=""/>
         <attributes>
-            <id name="userId">
-                <column name="USER_ID" length="30"/>
+            <id name="idemployee">
+                <column name="ID_EMPLOYEE" length="30"/>
             </id>
             <basic name="userName">
                 <column name="USER_NAME" length="100"/>

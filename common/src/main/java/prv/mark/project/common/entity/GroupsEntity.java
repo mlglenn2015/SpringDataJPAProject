@@ -61,7 +61,6 @@ public class GroupsEntity implements Serializable {
     @Column(name = "GROUP_NAME", nullable = false, length = 100)
     private String groupName;
 
-    //@ManyToMany(mappedBy="groups") TODO remove
     // The entity you put 'mappedBy' is the one which is NOT the owner
     @ManyToMany
     @JoinTable(
