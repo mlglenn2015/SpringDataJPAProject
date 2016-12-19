@@ -135,17 +135,77 @@ public class GroupsUsersManyToManyTesting extends AbstractAppTransactionalTest i
          *    UserId: U10101, UserName: Test User_U10101
          * ************************************************************************************************
          */
+        groupsEntity = buildGroupsEntity("G10200", "TEST GROUP200");
+        LOGGER.debug("SAVING GROUPSENTITY WITH VALUES G10200, TEST GROUP200");
+        groupsEntity.getUsersCollection().add(new UsersEntity("U10200", "Test User_U10200", null));
+        groupsEntity.getUsersCollection().add(new UsersEntity("U102XX", "Test User_U102XX", null));
+        saveGroupsEntity(groupsEntity);
+        printGroupsEntity(groupsEntity);
+        LOGGER.debug("************************************************************************************************");
+        LOGGER.debug("LISTING USERS_GROUPS ENTRIES...");
+        for (GroupHasUsers groupHasUsers : getDataFromGroupHasUsers()) {
+            LOGGER.debug("GROUP_ID:{}, USER_ID:{}", groupHasUsers.getGroupId(), groupHasUsers.getUserId());
+        }
+        LOGGER.debug("************************************************************************************************");
+        LOGGER.debug("REMOVING USERSENTITY U102XX ...");
+        UsersEntity usersEntity = usersRepository.findByUserId("U102XX").get();
+        groupsEntity.getUsersCollection().remove(usersEntity);
+        LOGGER.debug("************************************************************************************************");
+        saveGroupsEntity(groupsEntity);
+        printGroupsEntity(groupsEntity);
+        LOGGER.debug("************************************************************************************************");
+        LOGGER.debug("************************************************************************************************");
+        /*
+        ************************************************************************************************
+        SAVING GROUPSENTITY WITH VALUES G10200, TEST GROUP200
 
-        //UsersEntity usersEntity = buildUsersEntity("U10100", "Test User100");
-        //printUsersEntity(usersEntity);
-        //LOGGER.debug("");
-        //LOGGER.debug("SAVING USERSENTITY WITH VALUES U10100, Test User100");
-        //UsersEntity savedUsersEntity = saveUsersEntity(usersEntity);
-        //LOGGER.debug("************************************************************************************************");
-        //assertNotNull(savedUsersEntity);
-        //assertEquals(usersEntity.getUserName(), savedUsersEntity.getUserName());
-        //printGroupsEntity(savedGroupsEntity);
-        //printUsersEntity(savedUsersEntity);
+        *** GroupsUsersManyToManyTesting: LISTING GROUPS ENTITY ***
+        GroupId: G10200, GroupName: TEST GROUP200_G10200
+
+           *** GroupsUsersManyToManyTesting: LISTING USERS ENTITY ***
+           UserId: U10100, UserName: Test User_U10100
+
+           *** GroupsUsersManyToManyTesting: LISTING USERS ENTITY ***
+           UserId: U10101, UserName: Test User_U10101
+
+           *** GroupsUsersManyToManyTesting: LISTING USERS ENTITY ***
+           UserId: U10200, UserName: Test User_U10200
+
+           *** GroupsUsersManyToManyTesting: LISTING USERS ENTITY ***
+           UserId: U102XX, UserName: Test User_U102XX
+
+         ************************************************************************************************
+         LISTING USERS_GROUPS ENTRIES...
+         GROUP_ID:00001, USER_ID:G124807
+         GROUP_ID:00001, USER_ID:G124808
+         GROUP_ID:00002, USER_ID:G124809
+         GROUP_ID:00003, USER_ID:G124809
+         GROUP_ID:G10100, USER_ID:U10100
+         GROUP_ID:G10100, USER_ID:U10101
+         GROUP_ID:G10200, USER_ID:U10100
+         GROUP_ID:G10200, USER_ID:U10101
+         GROUP_ID:G10200, USER_ID:U10200
+         GROUP_ID:G10200, USER_ID:U102XX
+
+         ************************************************************************************************
+         REMOVING USERSENTITY U102XX ...
+         ************************************************************************************************
+
+         *** GroupsUsersManyToManyTesting: LISTING GROUPS ENTITY ***
+         GroupId: G10200, GroupName: TEST GROUP200_G10200
+
+             *** GroupsUsersManyToManyTesting: LISTING USERS ENTITY ***
+             UserId: U10100, UserName: Test User_U10100
+
+             *** GroupsUsersManyToManyTesting: LISTING USERS ENTITY ***
+             UserId: U10101, UserName: Test User_U10101
+
+             *** GroupsUsersManyToManyTesting: LISTING USERS ENTITY ***
+             UserId: U10200, UserName: Test User_U10200
+
+         ************************************************************************************************
+         ************************************************************************************************
+         */
     }
 
 
